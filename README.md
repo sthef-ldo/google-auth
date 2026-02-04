@@ -1,5 +1,8 @@
-🦆 Dashboard de Autenticación Google & Email 
-¡Bienvenido a mi mini proyecto de autenticación dual! Un dashboard simple pero 
+Miniproyecto 5/1 🦆
+
+૮₍ ´ ꒳ `₎ა
+
+Autenticación dual! Un dashboard simple pero 
 potente (es mentira pero bueno) donde puedes ver quién entró con Google (🔵) y quién con correo (🟢).
 
 🛠️ Tecnologías

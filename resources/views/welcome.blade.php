@@ -2291,6 +2291,16 @@
     @if (Route::has('login'))
         <div class="h-14.5 hidden lg:block"></div>
     @endif
+
+
+    {{-- FOOTER --}}
+    <footer class="w-full py-6 mt-8 border-t border-[#262626]">
+        <div class="w-full lg:max-w-4xl max-w-[335px] mx-auto text-sm text-amber-50 flex justify-between">
+            <span>&copy; {{ date('Y') }} BaohDev</span>
+            <span>Hecho con Laravel & Tailwind</span>
+        </div>
+    </footer>
+
 </body>
 
 </html>

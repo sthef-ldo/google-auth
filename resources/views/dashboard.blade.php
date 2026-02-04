@@ -1,18 +1,51 @@
 <x-layouts::app :title="__('Dashboard')">
-    <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
-        <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-                <x-placeholder-pattern class="absolute inset-0 size-full stroke-gray-900/20 dark:stroke-neutral-100/20" />
-            </div>
-            <div class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-                <x-placeholder-pattern class="absolute inset-0 size-full stroke-gray-900/20 dark:stroke-neutral-100/20" />
-            </div>
-            <div class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-                <x-placeholder-pattern class="absolute inset-0 size-full stroke-gray-900/20 dark:stroke-neutral-100/20" />
-            </div>
-        </div>
-        <div class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-            <x-placeholder-pattern class="absolute inset-0 size-full stroke-gray-900/20 dark:stroke-neutral-100/20" />
+
+    <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl ">
+
+        <!-- Título agregado -->
+
+        <h1 class="text-xl font-bold">Usuarios registrados</h1>
+
+        <flux:table>
+            <flux:table.columns>
+                <flux:table.column>Id</flux:table.column>
+                <flux:table.column>Nombre</flux:table.column>
+                <flux:table.column>email</flux:table.column>
+                <flux:table.column>Tipo de Cuenta</flux:table.column>
+            </flux:table.columns>
+
+            <flux:table.rows>
+
+                @foreach ($users as $user)
+                    <flux:table.row>
+                        <flux:table.cell>{{ $user->id }}</flux:table.cell>
+                        <flux:table.cell>{{ $user->name }}</flux:table.cell>
+                        <flux:table.cell>
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-900">{{ $user->email }}</span>
+                                <span
+                                    class="text-sm text-gray-500">{{ $user->created_at?->format('d/m/Y') ?? '—' }}</span>
+                            </div>
+                        </flux:table.cell>
+
+                        @if (empty($user->google_id))
+                            <flux:table.cell variant="strong" color="green"> Correo </flux:table.cell>
+                        @else
+                            <flux:table.cell variant="strong" color="blue"> Google </flux:table.cell>
+                        @endif
+                        {{-- 
+                        Variante para determinar el tipo de cuenta  
+                        <flux:table.cell variant="strong" color="blue"> {{ $user->google_id ? 'Google' : 'Correo' }} </flux:table.cell>
+                        --}}
+                    </flux:table.row>
+                @endforeach
+
+            </flux:table.rows>
+
+        </flux:table>
+        <div class="mt-6 flex justify-center">
+            {{ $users->links('pagination::tailwind') }}
         </div>
     </div>
+
 </x-layouts::app>

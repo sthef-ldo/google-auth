@@ -4,11 +4,14 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+// Ruta Dashbpard modificada
+Route::get('/dashboard', [UserController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/google-auth/redirect', function () {
     return Socialite::driver('google')->redirect();
@@ -33,9 +36,6 @@ Route::get('/google-auth/callback', function () {
 });
 
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
 
 
 
